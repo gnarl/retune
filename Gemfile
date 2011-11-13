@@ -1,0 +1,7 @@
+source "http://rubygems.org"
+gem "awesome_print"
+gem "rack", ">=1.3.5"
+gem "rak"
+gem "rb-appscript"
+gem "shotgun" 
+gem "sinatra", ">=1.3.1"
