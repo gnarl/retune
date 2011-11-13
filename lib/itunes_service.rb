@@ -1,3 +1,5 @@
+#! /usr/bin/env ruby
+
 # itunes_service.rb
 require 'sinatra'
 require 'json'
