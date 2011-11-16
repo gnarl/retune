@@ -38,6 +38,4 @@ class ItunesAppScript
   #ap song_names
 end
 
-itunes = ItunesAppScript.new
-ap itunes.artists
 
