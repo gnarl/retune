@@ -1,6 +1,6 @@
 require 'sinatra'
 require 'json'
-require 'applay'
+require './lib/applay'
 
 
 get '/music/play' do
