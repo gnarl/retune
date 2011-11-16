@@ -1,9 +1,6 @@
-#! /usr/bin/env ruby
-
-# itunes_service.rb
 require 'sinatra'
 require 'json'
-require './applay'
+require 'applay'
 
 
 get '/music/play' do
