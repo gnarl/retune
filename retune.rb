@@ -24,7 +24,7 @@ get '/music/artists' do
 end
 
 get '/music/show/:artist' do
-  list = @ItunesAppScript.songs_by_artist(params[:artist])
+  list = @iTunesAppScript.songs_by_artist(params[:artist])
   content_type :json
   list.to_json
 end
