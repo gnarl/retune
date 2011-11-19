@@ -53,10 +53,10 @@ get '/queue/show' do
   list.to_json
 end
 
-get '/queue/add/:song' do
+post '/queue' do
   @ituAppScript.q_add(params[:song]) 
 end
 
-get '/queue/skip' do
+delete '/queue/next' do
   @ituAppScript.skip
 end
