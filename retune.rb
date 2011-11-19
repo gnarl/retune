@@ -6,41 +6,57 @@ require 'json'
 require './lib/applay'
 
 before do
-  @iTunesAppScript = ItunesAppScript.new unless @ItunesAppScript 
+  @ituAppScript = ItunesAppScript.new unless @ItunesAppScript 
 end
 
 #TODO figure out how to match routes to appScript method names
 
 get '/music/artists' do
   content_type :json
-  list = @iTunesAppScript.artists
+  list = @ituAppScript.artists
   list.sort.to_json
 end
 
 get '/music/next' do
-  @iTunesAppScript.next
+  @ituAppScript.next
 end
 
 get '/music/play' do
-  @iTunesAppScript.play
+  @ituAppScript.play
 end
 
 get '/music/previous' do
-  @iTunesAppScript.previous
+  @ituAppScript.previous
+end
+
+get '/music/selection' do
+  r = @ituAppScript.selection
 end
 
 get '/music/show/:artist' do
   content_type :json
-  list = @iTunesAppScript.songs_by_artist(params[:artist])
+  list = @ituAppScript.songs_by_artist(params[:artist])
   list.to_json
 end
 
 get '/music/song/:song' do
-  @iTunesAppScript.play_song(params[:song])
+  @ituAppScript.play_song(params[:song])
 end
 
 get '/music/stop' do
-  @iTunesAppScript.stop
+  @ituAppScript.stop
 end
 
+get '/queue/show' do
+  content_type :json
+  list = @ituAppScript.q_show
+  list.to_json
+end
 
+get '/queue/add/:song' do
+  @ituAppScript.q_add(params[:song]) 
+end
+
+get '/queue/skip' do
+  @ituAppScript.skip
+end
