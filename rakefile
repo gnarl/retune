@@ -9,5 +9,5 @@ desc "Run unit tests"
 Rake::TestTask.new("test_units") do |t|
   t.pattern = 'test/*_test.rb'
   t.verbose = true
-  t.warning = true
+  #t.warning = true
 end

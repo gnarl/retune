@@ -7,7 +7,6 @@ class ApplayTest < Test::Unit::TestCase
 
   def setup
     @itu = ItunesAppScript.new(TEST_QUEUE)
-
   end
 
   def teardown
@@ -17,10 +16,23 @@ class ApplayTest < Test::Unit::TestCase
   end
 
   def test_empty_queue
-    sleep(2)
     assert @itu.queue_empty? 
     @itu.q_add('Goodbye Earl')
     assert !@itu.queue_empty? 
+  end
+
+  def test_player_state
+    assert @itu.queue_empty?
+    assert_equal('stopped', @itu.player_state)
+  end
+
+  def test_play_and_stop
+    @itu.q_add('Goodbye Earl')
+    assert_equal('stopped', @itu.player_state)
+    @itu.play
+    assert_equal('playing', @itu.player_state)
+    @itu.stop
+    assert_equal('stopped', @itu.player_state)
   end
 
 

@@ -17,33 +17,17 @@ get '/music/artists' do
   list.sort.to_json
 end
 
-get '/music/next' do
-  @ituAppScript.next
-end
-
-get '/music/play' do
+get '/queue/play' do
   @ituAppScript.play
 end
 
-get '/music/previous' do
-  @ituAppScript.previous
-end
-
-get '/music/selection' do
-  r = @ituAppScript.selection
-end
-
-get '/music/show/:artist' do
+get '/catalog/show/:artist' do
   content_type :json
   list = @ituAppScript.songs_by_artist(params[:artist])
   list.to_json
 end
 
-get '/music/song/:song' do
-  @ituAppScript.play_song(params[:song])
-end
-
-get '/music/stop' do
+get '/queue/stop' do
   @ituAppScript.stop
 end
 
