@@ -29,11 +29,18 @@ class ApplayTest < Test::Unit::TestCase
   def test_play_and_stop
     @itu.q_add('Goodbye Earl')
     assert_equal('stopped', @itu.player_state)
-    @itu.play
+    @itu.q_play
     assert_equal('playing', @itu.player_state)
     @itu.stop
     assert_equal('stopped', @itu.player_state)
   end
 
+  def test_show
+    assert @itu.queue_empty? 
+    @itu.q_add('Goodbye Earl')
+    assert_equal("Me First and the Gimme Gimmes - Goodbye Earl", @itu.q_show[0])
+    @itu.q_add("Lookin' for Love")
+    assert_equal("Me First and the Gimme Gimmes - Lookin' for Love", @itu.q_show[1])
+  end
 
 end
