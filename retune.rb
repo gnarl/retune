@@ -11,14 +11,10 @@ end
 
 #TODO figure out how to match routes to appScript method names
 
-get '/music/artists' do
+get '/catalog/artists' do
   content_type :json
   list = @ituAppScript.artists
   list.sort.to_json
-end
-
-get '/queue/play' do
-  @ituAppScript.q_play
 end
 
 get '/catalog/show/:artist' do
@@ -27,8 +23,12 @@ get '/catalog/show/:artist' do
   list.to_json
 end
 
-get '/queue/stop' do
-  @ituAppScript.stop
+get '/queue/add/:song' do
+  @ituAppScript.q_add(params[:song]) 
+end
+
+get '/queue/play' do
+  @ituAppScript.q_play
 end
 
 get '/queue/show' do
@@ -37,10 +37,11 @@ get '/queue/show' do
   list.to_json
 end
 
-get '/queue/add/:song' do
-  @ituAppScript.q_add(params[:song]) 
-end
-
 get '/queue/skip' do
   @ituAppScript.skip
 end
+
+get '/queue/stop' do
+  @ituAppScript.stop
+end
+
