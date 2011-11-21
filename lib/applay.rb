@@ -19,7 +19,7 @@ class ItunesAppScript
     start_poll
   end
   
-  def play 
+  def q_play 
     @itu.play(@queue.tracks[1]) unless queue_empty?
   end
 

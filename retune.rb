@@ -18,7 +18,7 @@ get '/music/artists' do
 end
 
 get '/queue/play' do
-  @ituAppScript.play
+  @ituAppScript.q_play
 end
 
 get '/catalog/show/:artist' do
