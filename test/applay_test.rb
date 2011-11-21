@@ -27,13 +27,15 @@ class ApplayTest < Test::Unit::TestCase
   end
 
   def test_play_and_stop
-    @itu.q_add('Goodbye Earl')
     assert_equal('stopped', @itu.player_state)
-    @itu.q_play
+    @itu.q_add('Goodbye Earl')
     assert_equal('playing', @itu.player_state)
     @itu.stop
     assert_equal('stopped', @itu.player_state)
+    @itu.q_play
+    assert_equal('playing', @itu.player_state)
   end
+
 
   def test_show
     assert @itu.queue_empty? 
@@ -41,6 +43,30 @@ class ApplayTest < Test::Unit::TestCase
     assert_equal("Me First and the Gimme Gimmes - Goodbye Earl", @itu.q_show[0])
     @itu.q_add("Lookin' for Love")
     assert_equal("Me First and the Gimme Gimmes - Lookin' for Love", @itu.q_show[1])
+  end
+
+  def test_remove
+    assert @itu.queue_empty? 
+    @itu.q_add('Goodbye Earl')
+    @itu.q_add("Lookin' for Love")
+    assert_equal(2, @itu.q_show.size)
+    @itu.q_remove('Goodbye Earl')
+    assert_equal("Me First and the Gimme Gimmes - Lookin' for Love", @itu.q_show[0])
+    @itu.q_add('E-Pro')
+    @itu.q_remove("Lookin' for Love")
+    assert_equal(1, @itu.q_show.size)
+    assert_equal("Beck - E-Pro", @itu.q_show[0])
+  end
+
+  def test_skip_and_auto_remove
+    @itu.q_add('Goodbye Earl')
+    @itu.q_add("Lookin' for Love")
+    @itu.q_add('E-Pro')
+    assert_equal('playing', @itu.player_state)
+    @itu.skip
+    @itu.skip
+    sleep(8)
+    puts @itu.q_show
   end
 
 end

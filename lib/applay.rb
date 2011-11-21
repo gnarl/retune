@@ -24,7 +24,7 @@ class ItunesAppScript
   end
   
   def skip
-    @itu.next 
+    @itu.next_track 
   end
 
   def q_play 
@@ -39,9 +39,10 @@ class ItunesAppScript
   end
 
   def q_add(song_name)
+    empty = queue_empty?
     this_track = catalog_track(song_name)
-    ap this_track
     this_track.duplicate(:to => @queue)
+    q_play if empty
   end
 
   def q_remove(song_name)
