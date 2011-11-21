@@ -66,7 +66,7 @@ class ApplayTest < Test::Unit::TestCase
     @itu.skip
     @itu.skip
     sleep(8)
-    puts @itu.q_show
+    assert_equal("Beck - E-Pro", @itu.q_show[0])
   end
 
 end

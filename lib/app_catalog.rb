@@ -62,7 +62,6 @@ module AppCatalog
   #management method
   def remove_previous_tracks
     if @queue.exists 
-       puts "q: #{@queue.exists} : "
       unless queue_empty?
         trax = @queue.tracks.get
         index = trax.index(@itu.current_track.get)
