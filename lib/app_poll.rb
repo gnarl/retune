@@ -1,8 +1,3 @@
-require 'appscript'
-
-include Appscript
-
-#Add testing
 
 class AppPoll
   POLL_SLEEP = 5
