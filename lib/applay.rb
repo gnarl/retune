@@ -6,6 +6,7 @@ include Appscript
 include AppCatalog
 
 class ItunesAppScript
+  attr_accessor :itu
 
   POLL_SLEEP = 5
 
@@ -15,8 +16,6 @@ class ItunesAppScript
 
     @lib = setup_playlist("Library")
     @queue = setup_playlist(queue_name)
-
-    start_poll
   end
   
   def stop
@@ -46,7 +45,7 @@ class ItunesAppScript
   end
 
   def q_remove(song_name)
-    this_track = @queue.tracks[song_name].delete
+    @queue.tracks[song_name].delete
   end
   
 end
