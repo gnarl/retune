@@ -8,8 +8,6 @@ include AppCatalog
 class ItunesAppScript
   attr_accessor :itu
 
-  POLL_SLEEP = 5
-
   def initialize(queue_name='queue')
     @itu = app('iTunes')
     @whose = Appscript.its
