@@ -40,42 +40,4 @@ module AppCatalog
     @itu.player_state.get.to_s
   end
   
-  #TODO refactor polling
-  #Add testing
-  #management method
-  def start_poll
-    puts "starting polling thread"
-    unless @poll_thread
-      @poll_thread = Thread.start do
-        while(true)
-          begin
-            remove_previous_tracks 
-          rescue
-            puts $! 
-          end
-          sleep(POLL_SLEEP)
-        end
-      end
-    end
-  end
-
-  #management method
-  def remove_previous_tracks
-    if @queue.exists 
-      unless queue_empty?
-        trax = @queue.tracks.get
-        index = trax.index(@itu.current_track.get)
-        if index > 0
-          (0..(index-1)).each do |i|
-            puts "removed #{trax[i].name.get} from queue"
-            q_remove(trax[i].name.get)
-          end
-        end
-      end
-    end
-  end
-
-
-
-  
 end
