@@ -2,9 +2,8 @@
 class AppPoll
   POLL_SLEEP = 5
 
-  def initialize(itunes_app, queue_name='queue')
-    @itu = itunes_app 
-    @queue = @itu.playlists[queue_name]
+  def initialize(itunes_app_script)
+    @ias = itunes_app_script
   end
 
   def start_poll
@@ -15,7 +14,12 @@ class AppPoll
         while(true)
           puts "polling #{i+=1}"
           begin
-            remove_previous_tracks 
+            if @ias.queue_exists? && !@ias.queue_empty? 
+              index = @ias.queue_current_index
+              if index > 0
+                @ias.queue_remove_previous_tracks(index)
+              end
+            end
           rescue
             puts $! 
           end
@@ -26,18 +30,6 @@ class AppPoll
     @poll_thread
   end
 
-  def remove_previous_tracks
-    if @queue.exists && !queue_empty? 
-        #puts  @itu.current_track.exists
-        trax = @queue.tracks.get
-        index = trax.index(@itu.current_track.get)
-        if index > 0
-          (0..(index-1)).each do |i|
-            puts "removed #{trax[i].name.get} from queue"
-            @queue.tracks[trax[i].name.get].delete
-          end
-        end
-      end
-  end
 end
+
 

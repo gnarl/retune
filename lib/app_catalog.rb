@@ -35,7 +35,25 @@ module AppCatalog
     @queue.tracks.get.size == 0
   end
 
- 
+  def queue_exists?
+    @queue.exists
+  end
+
+  def queue_remove_previous_tracks(index)
+    (0..(index-1)).each do |i|
+      trax = @queue.tracks.get
+      puts "removed #{trax[i].name.get} from queue"
+      @queue.tracks[trax[i].name.get].delete
+    end
+  end
+
+
+  def queue_current_index
+    #TODO: find if current_track is valid
+    trax = @queue.tracks.get
+    trax.index(@itu.current_track.get)
+  end
+
   def player_state
     @itu.player_state.get.to_s
   end

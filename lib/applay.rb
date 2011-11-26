@@ -6,7 +6,6 @@ include Appscript
 include AppCatalog
 
 class ItunesAppScript
-  attr_accessor :itu
 
   def initialize(queue_name='queue')
     @itu = app('iTunes')

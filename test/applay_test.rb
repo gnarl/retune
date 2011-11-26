@@ -58,15 +58,4 @@ class ApplayTest < Test::Unit::TestCase
     assert_equal("Beck - E-Pro", @itu.q_show[0])
   end
 
-  def test_skip_and_auto_remove
-    @itu.q_add('Goodbye Earl')
-    @itu.q_add("Lookin' for Love")
-    @itu.q_add('E-Pro')
-    assert_equal('playing', @itu.player_state)
-    @itu.skip
-    @itu.skip
-    sleep(8)
-    assert_equal("Beck - E-Pro", @itu.q_show[0])
-  end
-
 end

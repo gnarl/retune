@@ -7,7 +7,7 @@ require './lib/applay'
 require './lib/app_poll'
 
 set :itu_app_script, ItunesAppScript.new
-app_poll = AppPoll.new(settings.itu_app_script.itu)
+app_poll = AppPoll.new(settings.itu_app_script)
 set :itu_poll_thread, app_poll.start_poll
 
 get '/catalog/artists' do
