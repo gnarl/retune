@@ -1,0 +1,3 @@
+
+Determine if AppleScript use of iTunes is threadsafe.  If not then enable :lock 
+in Sinatra. 
