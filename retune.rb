@@ -4,44 +4,43 @@ require 'bundler/setup'
 require 'sinatra'
 require 'json'
 require './lib/applay'
+require './lib/app_poll'
 
-before do
-  @ituAppScript = ItunesAppScript.new unless @ItunesAppScript 
-end
-
-#TODO figure out how to match routes to appScript method names
+set :itu_app_script, ItunesAppScript.new
+app_poll = AppPoll.new(settings.itu_app_script.itu)
+set :itu_poll_thread, app_poll.start_poll
 
 get '/catalog/artists' do
   content_type :json
-  list = @ituAppScript.artists
+  list = settings.itu_app_script.artists
   list.sort.to_json
 end
 
 get '/catalog/show/:artist' do
   content_type :json
-  list = @ituAppScript.songs_by_artist(params[:artist])
+  list = settings.itu_app_script.songs_by_artist(params[:artist])
   list.to_json
 end
 
-get '/queue/add/:song' do
-  @ituAppScript.q_add(params[:song]) 
+post '/queue/add' do
+  settings.itu_app_script.q_add(params[:song]) 
 end
 
 get '/queue/play' do
-  @ituAppScript.q_play
+  settings.itu_app_script.q_play
 end
 
 get '/queue/show' do
   content_type :json
-  list = @ituAppScript.q_show
+  list = settings.itu_app_script.q_show
   list.to_json
 end
 
 get '/queue/skip' do
-  @ituAppScript.skip
+  settings.itu_app_script.skip
 end
 
 get '/queue/stop' do
-  @ituAppScript.stop
+  settings.itu_app_script.stop
 end
 
