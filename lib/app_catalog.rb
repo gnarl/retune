@@ -14,6 +14,10 @@ module AppCatalog
     @lib.tracks[song_name].get
   end
 
+  def player_state
+    @itu.player_state.get.to_s
+  end
+
 # Plays song by name from catalog
 #  def play_song(song_name)
 #    @itu.play(@lib.tracks[song_name])
@@ -44,14 +48,9 @@ module AppCatalog
     end
   end
 
-
   def queue_current_index
     trax = @queue.tracks.get
     trax.index(@itu.current_track.get)
-  end
-
-  def player_state
-    @itu.player_state.get.to_s
   end
   
 end

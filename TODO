@@ -1,11 +1,8 @@
 Current
 -------
 
-*  Determine if AppleScript use of iTunes is threadsafe.  If not then enable :lock 
-in Sinatra. 
 *  Add Unit Tests for app_catalog.rb
-*  Refactor/Organize all queue related methods.
-*  Rename applay.rb
+*  Find if current_track is valid
 
 
 Future
@@ -15,4 +12,5 @@ Future
 *  Add ability to play random songs from Library
 *  Add ability to load 5 random songs that belong to a genre into queue
 *  Add ability to load genius list into queue
-
+*  Determine if AppleScript use of iTunes is threadsafe.  If not then enable :lock 
+in Sinatra. 
