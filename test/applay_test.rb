@@ -6,7 +6,7 @@ class ApplayTest < Test::Unit::TestCase
   TEST_QUEUE = 'test_queue'
 
   def setup
-    @itu = ItunesAppScript.new(TEST_QUEUE)
+    @itu = AppScriptAdapter.new(TEST_QUEUE)
   end
 
   def teardown

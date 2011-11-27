@@ -6,7 +6,7 @@ require 'json'
 require './lib/applay'
 require './lib/app_poll'
 
-set :itu_app_script, ItunesAppScript.new
+set :itu_app_script, AppScriptAdapter.new
 app_poll = AppPoll.new(settings.itu_app_script)
 set :itu_poll_thread, app_poll.start_poll
 

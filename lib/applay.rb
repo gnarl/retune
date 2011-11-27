@@ -5,7 +5,7 @@ require './lib/app_catalog'
 include Appscript
 include AppCatalog
 
-class ItunesAppScript
+class AppScriptAdapter
 
   def initialize(queue_name='queue')
     @itu = app('iTunes')

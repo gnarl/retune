@@ -11,25 +11,25 @@ class AppPollTest < Test::Unit::TestCase
 
 
   def test_invalid_queue
-    @ias = ItunesAppScriptStub.new({:exists => false, :empty => false, :current_index => 0})
+    @ias = AppScriptAdapterStub.new({:exists => false, :empty => false, :current_index => 0})
     @app_poll = AppPoll.new(@ias)
     assert(!@app_poll.valid_queue?, "#{@app_poll.valid_queue?} but should be false") 
   end
 
   def test_empty_queue
-    @ias = ItunesAppScriptStub.new({:exists => true, :empty => true})
+    @ias = AppScriptAdapterStub.new({:exists => true, :empty => true})
     @app_poll = AppPoll.new(@ias)
     assert(!@app_poll.valid_queue?) 
   end
 
   def test_valid_queue
-    @ias = ItunesAppScriptStub.new({:exists => true, :empty => false, :current_index => 0})
+    @ias = AppScriptAdapterStub.new({:exists => true, :empty => false, :current_index => 0})
     @app_poll = AppPoll.new(@ias)
     assert(@app_poll.valid_queue?)
   end
 
   def test_process_queue
-    @ias = ItunesAppScriptStub.new({:exists => true, :empty => false, :current_index => 3})
+    @ias = AppScriptAdapterStub.new({:exists => true, :empty => false, :current_index => 3})
     assert(@ias.current_index == 3)
     @app_poll = AppPoll.new(@ias)
     @app_poll.process_queue
@@ -40,7 +40,7 @@ class AppPollTest < Test::Unit::TestCase
 
 end
 
-class ItunesAppScriptStub
+class AppScriptAdapterStub
   attr_accessor :current_index
 
   def initialize(params)
