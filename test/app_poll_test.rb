@@ -8,71 +8,63 @@ class AppPollTest < Test::Unit::TestCase
 #Add Testing
   # mock out applay
 
-  def setup
-    @itu = AppscriptStub.new
-    @app_poll = AppPoll(@itu)
+
+
+  def test_invalid_queue
+    @ias = ItunesAppScriptStub.new({:exists => false, :empty => false, :current_index => 0})
+    @app_poll = AppPoll.new(@ias)
+    assert(!@app_poll.valid_queue?, "#{@app_poll.valid_queue?} but should be false") 
+  end
+
+  def test_empty_queue
+    @ias = ItunesAppScriptStub.new({:exists => true, :empty => true})
+    @app_poll = AppPoll.new(@ias)
+    assert(!@app_poll.valid_queue?) 
+  end
+
+  def test_valid_queue
+    @ias = ItunesAppScriptStub.new({:exists => true, :empty => false, :current_index => 0})
+    @app_poll = AppPoll.new(@ias)
+    assert(@app_poll.valid_queue?)
+  end
+
+  def test_process_queue
+    @ias = ItunesAppScriptStub.new({:exists => true, :empty => false, :current_index => 3})
+    assert(@ias.current_index == 3)
+    @app_poll = AppPoll.new(@ias)
+    @app_poll.process_queue
+    assert(@ias.current_index == 0)
   end
 
 
-   def test_skip_and_auto_remove
-    @itu.q_add('Goodbye Earl')
-    @itu.start_poll
-    @itu.q_add("Lookin' for Love")
-    @itu.q_add('E-Pro')
-    assert_equal('playing', @itu.player_state)
-    @itu.skip
-    @itu.skip
-    sleep(8)
-    assert_equal("Beck - E-Pro", @itu.q_show[0])
-  end
-
- 
 
 end
 
-class ItunesAppscriptStub
+class ItunesAppScriptStub
+  attr_accessor :current_index
 
-  def playlists(ary)
-    @queue = QueueStub.new(ary[0])
+  def initialize(params)
+    @exists = params[:exists] 
+    @empty = params[:empty] 
+    @current_index = params[:current_index] 
   end
 
-  def current_track.get
-    @queue.current
-  end
-end
-
-class QueueStub
-  def initialize(name)
-   @name = name 
+  def queue_exists? 
+    @exists
   end
 
-  def exists?
-    ret = true
-    ret = false if name.eql?("no_queue")
-    ret 
+  def queue_empty?
+    @empty
   end
 
-  def empty?
-    ret = false 
-    ret = true if name.eql?("empty_queue")
-    ret 
+  def queue_current_index
+    @current_index
   end
 
-  def tracks.get
-
-  end
-
-  def tracks[trax[i].name.get].delete
+  def queue_remove_previous_tracks(index)
+    @current_index = 0
   end
 
 end
 
-class TrackStub
-    def delete
-      
-    end
 
-    def get
-
-    end
-end
