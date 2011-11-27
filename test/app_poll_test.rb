@@ -5,11 +5,6 @@ class AppPollTest < Test::Unit::TestCase
 
   TEST_QUEUE = 'test_queue'
 
-#Add Testing
-  # mock out applay
-
-
-
   def test_invalid_queue
     @ias = AppScriptAdapterStub.new({:exists => false, :empty => false, :current_index => 0})
     @app_poll = AppPoll.new(@ias)

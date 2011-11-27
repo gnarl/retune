@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'applay'
+require 'app_script_adapter'
 
 class ApplayTest < Test::Unit::TestCase
 

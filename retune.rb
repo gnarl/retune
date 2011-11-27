@@ -3,7 +3,7 @@ require 'bundler/setup'
 
 require 'sinatra'
 require 'json'
-require './lib/applay'
+require './lib/app_script_adapter'
 require './lib/app_poll'
 
 set :itu_app_script, AppScriptAdapter.new
