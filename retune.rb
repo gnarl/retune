@@ -12,13 +12,13 @@ set :itu_poll_thread, app_poll.start_poll
 
 get '/catalog/artists' do
   content_type :json
-  list = settings.itu_app_script.artists
+  list = settings.itu_app_script.all_artists
   list.sort.to_json
 end
 
 get '/catalog/show/:artist' do
   content_type :json
-  list = settings.itu_app_script.songs_by_artist(params[:artist])
+  list = settings.itu_app_script.all_songs_by_artist(params[:artist])
   list.to_json
 end
 

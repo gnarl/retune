@@ -10,7 +10,6 @@ class ItunesAppScript
   def initialize(queue_name='queue')
     @itu = app('iTunes')
     @whose = Appscript.its
-
     @lib = setup_playlist("Library")
     @queue = setup_playlist(queue_name)
   end
@@ -36,7 +35,7 @@ class ItunesAppScript
 
   def q_add(song_name)
     empty = queue_empty?
-    this_track = catalog_track(song_name)
+    this_track = library_track(song_name)
     this_track.duplicate(:to => @queue)
     q_play if empty
   end

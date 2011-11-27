@@ -1,16 +1,16 @@
 
 module AppCatalog
   
-  def artists
+  def all_artists
     artists = @lib.tracks.artist.get
     artists.uniq
   end
 
-  def songs_by_artist(name)
+  def all_songs_by_artist(name)
     @lib.tracks[@whose.artist.eq(name)].name.get
   end
 
-  def catalog_track(song_name)
+  def library_track(song_name)
     @lib.tracks[song_name].get
   end
 
@@ -20,9 +20,6 @@ module AppCatalog
 #  end
 
 
-
-###########################################
-#TODO Move following to another class/module
   def setup_playlist(name)
     pl = @itu.playlists[name]
     unless pl.exists
@@ -49,7 +46,6 @@ module AppCatalog
 
 
   def queue_current_index
-    #TODO: find if current_track is valid
     trax = @queue.tracks.get
     trax.index(@itu.current_track.get)
   end
